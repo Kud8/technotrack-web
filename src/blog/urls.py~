@@ -2,9 +2,8 @@
 
 from django.conf.urls import url
 from .views import *
-import post.views
 
 urlpatterns = [
     url(r'^posts/$', PostList.as_view(), name="post_list"),
-    url(r'^(?P<post_id>\d+)/$', post.views.show_post),
+    url(r'^(?P<post_id>\d+)/$', show_post),
 ]

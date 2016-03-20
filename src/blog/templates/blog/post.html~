@@ -6,7 +6,7 @@
 
     {{ post.text }}
     <br>
-    {{ post.pub_date|date:"m - d" }}
+    {{ post.pub_date}}
     <br>
 
 {% endblock %}
