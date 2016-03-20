@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post_id.title }}{% endblock %}
+
+{% block content %}
+
+    {{ post_id.text }}
+    <br>
+    <i>{{ post_id.pub_date }}</i>
+    <br>
+
+{% endblock %}
