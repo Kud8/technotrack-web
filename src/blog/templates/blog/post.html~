@@ -8,5 +8,14 @@
     <br>
     <i><small>{{ post.pub_date }}</small></i>
     <br>
+    
+    {% for comment in post.comment_set.all %}
+    <blockquote>
+        {{ comment.text }}
+        <br>
+        <i><small>{{ post.pub_date }}</small></i>
+    </blockquote>
+    {% endfor %}
+    
 
 {% endblock %}
