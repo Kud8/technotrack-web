@@ -9,7 +9,7 @@ class PostList(ListView):
     
 class PostView(DetailView):
     model = Post
-    template_name = 'post.html'
+    template_name = 'blog/post.html'
     context_object_name = 'post'
     
 def show_post(request, post_id=0):

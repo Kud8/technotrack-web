@@ -6,7 +6,8 @@
 {% for post in object_list %}
     <div>
         <div><i><small>{{ post.pub_date }}</small></i></div>
-        <div><a href = "{{ post.id }}"><b>{{ post.title }}</b></a></div>
+        <!-- <div><a href = "{% url "post_id" pk=post.id %}"><b>{{ post.title }}</b></a></div> -->
+        <div><a href = "../{{ post.id }}"><b>{{ post.title }}</b></a></div>
         <a>{{ post.text }}</a>
         <br>
         <br>
