@@ -5,5 +5,5 @@ from .views import *
 
 urlpatterns = [
     url(r'^posts/$', PostList.as_view(), name="post_list"),
-    url(r'^(?P<post_id>\d+)/$', show_post),
+    url(r'^(?P<post>\d+)/$', show_post),
 ]
