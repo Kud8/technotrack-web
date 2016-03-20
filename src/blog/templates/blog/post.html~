@@ -6,7 +6,7 @@
 
     {{ post.text }}
     <br>
-    {{ post.pub_date}}
+    <i><small>{{ post.pub_date }}</small></i>
     <br>
 
 {% endblock %}
