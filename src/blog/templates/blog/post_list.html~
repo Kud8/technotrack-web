@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Список постов{% endblock %}
+
+{% block content %}
+{% for post in object_list %}
+    <div>
+        <div><a href = "#"><b>{{ post.title }}</b></a></div>
+        <a>{{ post.text }}</a>
+        <br>
+        <br>
+    </div>
+{% endfor %}
+{% endblock %}
+

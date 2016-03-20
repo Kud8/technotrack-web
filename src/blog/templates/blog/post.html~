@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+    {{ post.text }}
+    <br>
+    {{ post.pub_date|date:"m - d" }}
+    <br>
+
+{% endblock %}
