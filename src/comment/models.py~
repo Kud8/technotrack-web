@@ -1,11 +1,19 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 
 from django.db import models
-from datetime import datetime
+from django.conf import settings
 
 class Comment(models.Model):
     text = models.TextField()
-    post = models.ForeignKey('blog.Post')
+    post = models.ForeignKey('blog.Post', related_name='comments')
     pub_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='comments')
+    
+class Meta:
+    verbose_name = u'Комментарий'
+    verbose_name_plural = u'Комментарии'
+    ordering = ('-created_at', )
 
 # Create your models here.

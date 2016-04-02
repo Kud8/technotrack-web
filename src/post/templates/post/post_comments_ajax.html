@@ -1,0 +1,9 @@
+{% for post in post.comments.all  %}
+{#    <a href="{% url "post:post_detail" pk=post.id %}" class="list-group-item">#}
+        <div class="post_title center">{{ post.title }}</div>
+        <div class="text">{{ post.text }}</div>
+
+        <div class="pub_date small">Дата создания: {{ post.pub_date }}</div>
+        <div class="change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
+{#    </a>#}
+{% endfor %}

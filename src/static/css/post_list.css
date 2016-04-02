@@ -1,0 +1,28 @@
+.post_title {
+    font-size: 20px;
+    color: black;
+}
+
+.text {
+    margin: 20px 10px;
+    color: black;
+}
+
+.pub_date {
+    display: inline-block;
+    float: right;
+}
+
+.change_date {
+    display: inline-block;
+    float: left;
+}
+
+.list-group-item {
+    padding: 10px 15px 30px;
+}
+
+.content__form {
+    text-align: right;
+    margin: 10px 20px 20px;
+}

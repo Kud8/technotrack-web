@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+    <br>
+    <i><small>Дата создания: {{ post.pub_date }}</small></i>
+    <br>
+    <i><small>Дата последнего редактирования: {{ post.change_date }}</small></i>
+    <br>
+    {{ post.text }}
+    <br>
+    
+    {% for comment in post.comments.all %}
+    <blockquote>
+        {{ comment.text }}
+        <br>
+        <i><small>{{ comment.pub_date }}</small></i>
+        <br>
+        <i><small>{{ comment.change_date }}</small></i>
+    </blockquote>
+    {% endfor %}
+    
+
+{% endblock %}

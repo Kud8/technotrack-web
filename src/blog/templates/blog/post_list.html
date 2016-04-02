@@ -3,11 +3,14 @@
 {% block title %}Список постов{% endblock %}
 
 {% block content %}
+
 {% for post in object_list %}
     <div>
-        <div><i><small>{{ post.pub_date }}</small></i></div>
-        <div><a href = "{% url "blog:post_detail" pk=post.id %}"><b>{{ post.title }}</b></a></div>
+        <div><i><small>Дата создания: {{ post.pub_date }}</small></i></div>
+        <div><i><small>Дата последнего редактирования: {{ post.change_date }}</small></i></div>
+        <div><a href = "{% url "post:post_detail" pk=post.id %}"><b>{{ post.title }}</b></a></div>
         <a>{{ post.text }}</a>
+        <br>
         <br>
         <br>
     </div>

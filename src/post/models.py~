@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
+from django.db import models
+from django.conf import settings
+
+class Post(models.Model):
+    title = models.CharField(max_length=140)
+    text = models.TextField()
+    pub_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,)
+    #moderator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='published_posts')
+    
+class Meta:
+    verbose_name = u'Пост'
+    verbose_name_plural = u'Посты'
+    ordering = ('-created_at', )
+
+# Create your models here.
