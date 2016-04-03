@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic import CreateView, UpdateView
 from .models import Post
 from .forms import QuesForm, QuestionListForm
+from django.shortcuts import resolve_url, get_object_or_404
 
 class PostList(ListView):
     template_name = "post/post_list.html"
@@ -29,13 +31,31 @@ class PostList(ListView):
         context['qform'] = self.qform
         return context
 
-    #Post.objects.filter(Q(is_published=True) | Q(author=request.user))
-
 
 class PostView(DetailView):
+#class PostView(CreateView):
     model = Post
     template_name = 'post/post.html'
     context_object_name = 'post'
+    # fields = ('text',)
+
+    # def dispatch(self, request, pk=None, *args, **kwargs):
+    #     self.post = get_object_or_404(Post.objects.all(), pk=pk)
+    #     return super(PostView, self).dispatch(request, *args, **kwargs)
+    #
+    # def form_valid(self, form):
+    #     form.instance.post = self.post
+    #     form.instance.author = self.request.user
+    #     return super(PostView, self).form_valid(form)
+    #
+    # def get_success_url(self):
+    #     return resolve_url("post:post_detail", pk=self.post.pk)
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostView, self).get_context_data(**kwargs)
+    #     context['post'] = self.post
+    #     return context
+
 
 class CommentsWithAjax(DetailView):
     template_name = 'post/post_comments_ajax.html'
@@ -43,4 +63,27 @@ class CommentsWithAjax(DetailView):
     context_object_name = 'post'
 
 
-# Create your views here.
+class PostCreate(CreateView):
+    model = Post
+    template_name = 'post/post_create.html'
+    fields = ('title', 'text')
+    context_object_name = 'post'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(PostCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        return resolve_url('post:post_detail', pk=self.object.pk)
+
+class PostUpdate(UpdateView):
+    template_name = 'post/post_update.html'
+    model = Post
+    fields = ('category', 'title', 'text', 'is_published')
+    context_object_name = 'post'
+
+    def get_queryset(self):
+        return super(PostUpdate, self).get_queryset().filter(author=self.request.user)
+
+    def get_success_url(self):
+        return resolve_url('post:post_detail', pk=self.object.pk)

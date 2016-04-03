@@ -7,7 +7,7 @@ from django.conf import settings
 
 class Post(models.Model):
     title = models.CharField(verbose_name=u'Заголовок', max_length=140)
-    text = models.TextField(verbose_name=u'Поле ввода текста')
+    text = models.TextField(verbose_name=u'Текст')
     pub_date = models.DateTimeField(verbose_name=u'Дата публикации', auto_now_add=True)
     change_date = models.DateTimeField(verbose_name=u'Дата последнего редактирования', auto_now=True)
     blog = models.ForeignKey('blog.Blog', verbose_name=u'Блог', related_name='post')

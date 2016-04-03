@@ -1,0 +1,47 @@
+.post {
+    padding: 10px 10px 25px 10px;
+    background-color: rgba(0,0,0, 0.1);
+    border-radius: 15px;
+}
+
+.post-text {
+    margin: 0px 10px 10px 10px;
+    font-size: 20px;
+    color: black;
+}
+
+.comment {
+    margin: 20px 10px;
+    padding: 10px 10px 30px 10px;
+    width: 40%;
+    border: 1px solid black;
+    border-radius: 5px;
+    border-color: #2b669a;
+}
+
+.comment-text {
+    color: black;
+
+}
+
+.comment-pub_date, .post-pub_date {
+    display: inline-block;
+    float: right;
+}
+
+.comment-change_date, .post-change_date  {
+    display: inline-block;
+    float: left;
+}
+
+.comment-pub_date, .comment-change_date {
+    margin-top: 10px;
+}
+
+.dialog {
+    /*display: none;*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: rgba(0,0,0, 0.5);
+}

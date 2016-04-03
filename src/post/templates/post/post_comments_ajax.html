@@ -1,9 +1,7 @@
-{% for post in post.comments.all  %}
-{#    <a href="{% url "post:post_detail" pk=post.id %}" class="list-group-item">#}
-        <div class="post_title center">{{ post.title }}</div>
-        <div class="text">{{ post.text }}</div>
-
-        <div class="pub_date small">Дата создания: {{ post.pub_date }}</div>
-        <div class="change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
-{#    </a>#}
+{% for comment in post.comments.all %}
+    <div class="comment">
+        <div class="comment-text">{{ comment.text }}</div>
+        <div class="comment-pub_date small">Дата создания: {{ comment.pub_date }}</div>
+        <div class="comment-change_date small">Дата последнего редактирования: {{ comment.change_date }}</div>
+    </div>
 {% endfor %}

@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 
+{% block include-css %}
+    {% load staticfiles %}
+    <link href="{% static "css/main_page.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
 
-    <p>Добро пожаловать на наш форум!</p>
-    <a href="../../../blogs/posts"> Перейти к списку постов </a>
+    <h2 class="center">Добро пожаловать на наш форум!</h2>
+
+    <div class="link">
+        <div class="btn btn-default">
+            <a href="../../../blogs/"> Перейти к списку постов </a>
+        </div>
+    </div>
 {% endblock %}

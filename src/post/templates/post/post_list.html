@@ -17,16 +17,17 @@
         <input type="submit" class="btn btn-default">
     </form>
 
-    <div class="list-group" id="comments">
+    <div class = "list-group">
+        {% for post in object_list %}
+            <a href="{% url "post:post_detail" pk=post.id %}" class="list-group-item">
+                <div class="post_title center">{{ post.title }}</div>
+                <div class="text">{{ post.text }}</div>
 
+                <div class="pub_date small">Дата создания: {{ post.pub_date }}</div>
+                <div class="change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
+            </a>
+        {% endfor %}
     </div>
 
-
-    <script>
-        function load_comments() {
-            $('#comments').load('{% url "post:post_comments" pk=post.id %}');
-        };
-        window.setInterval(load_comments, 1000);
-    </script>
 {% endblock %}
 

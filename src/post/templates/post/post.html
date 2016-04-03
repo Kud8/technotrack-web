@@ -1,26 +1,44 @@
 {% extends "base.html" %}
 
+{% block include-css %}
+    {% load staticfiles %}
+    <link href="{% static "css/post.css" %}" rel="stylesheet">
+{% endblock %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
+    <div class="post">
+        <div class="post-text">{{ post.text }}</div>
+        <div class="post-pub_date small">Дата создания: {{ post.pub_date }}</div>
+        <div class="post-change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
+    </div>
 
-    <i><small>Дата создания: {{ post.pub_date }}</small></i>
-    <br>
-    <i><small>Дата последнего редактирования: {{ post.change_date }}</small></i>
-    <br>
-    {{ post.text }}
-    <br>
-    
-    {% for comment in post.comments.all %}
-    <blockquote>
-        {{ comment.text }}
-        <br>
-        <i><small>{{ comment.pub_date }}</small></i>
-        <br>
-        <i><small>{{ comment.change_date }}</small></i>
-    </blockquote>
-    {% endfor %}
-    
+    <div id="comments">
+    </div>
 
+    {% if user.is_authenticated %}
+        <div class="dialog">
+            <form id="fff" method="post">
+                {% csrf_token %}
+                {{ form.errors }}
+                {{ form }}
+                <input type="submit">
+            </form>
+        </div>
+    {% endif %}
+
+
+{#    <script>#}
+{#        function load_comments() {#}
+{#            $('#comments').load('{% url "post:post_comments" pk=post.id %}');#}
+{#        };#}
+{#        window.setInterval(load_comments, 1000);#}
+{#    </script>#}
+
+{% endblock %}
+
+{% block include-js %}
+    {% load staticfiles %}
+    <script src="{% static "js/post.js" %}"></script>
 {% endblock %}
