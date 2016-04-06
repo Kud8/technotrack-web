@@ -14,12 +14,12 @@
         <div class="post-change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
     </div>
 
-    <div id="comments">
+    <div id="comments" data-comments-url='{% url "post:post_comments" pk=post.id %}'>
     </div>
 
     {% if user.is_authenticated %}
         <div class="dialog">
-            <form id="fff" method="post">
+            <form id="myForm" method="post">
                 {% csrf_token %}
                 {{ form.errors }}
                 {{ form }}
@@ -27,14 +27,6 @@
             </form>
         </div>
     {% endif %}
-
-
-{#    <script>#}
-{#        function load_comments() {#}
-{#            $('#comments').load('{% url "post:post_comments" pk=post.id %}');#}
-{#        };#}
-{#        window.setInterval(load_comments, 1000);#}
-{#    </script>#}
 
 {% endblock %}
 

@@ -5,6 +5,7 @@ from django.views.generic import CreateView, UpdateView
 from .models import Post
 from .forms import QuesForm, QuestionListForm
 from django.shortcuts import resolve_url, get_object_or_404
+from comment.models import Comment
 
 class PostList(ListView):
     template_name = "post/post_list.html"
@@ -32,29 +33,34 @@ class PostList(ListView):
         return context
 
 
+#class PostView(DetailView):
 class PostView(DetailView):
-#class PostView(CreateView):
     model = Post
     template_name = 'post/post.html'
     context_object_name = 'post'
-    # fields = ('text',)
 
-    # def dispatch(self, request, pk=None, *args, **kwargs):
-    #     self.post = get_object_or_404(Post.objects.all(), pk=pk)
-    #     return super(PostView, self).dispatch(request, *args, **kwargs)
-    #
-    # def form_valid(self, form):
-    #     form.instance.post = self.post
-    #     form.instance.author = self.request.user
-    #     return super(PostView, self).form_valid(form)
-    #
-    # def get_success_url(self):
-    #     return resolve_url("post:post_detail", pk=self.post.pk)
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostView, self).get_context_data(**kwargs)
-    #     context['post'] = self.post
-    #     return context
+class PostDialog(CreateView):
+    model = Comment
+    template_name = 'post/post.html'
+    context_object_name = 'comment'
+    fields = ('text',)
+
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        self.post = get_object_or_404(Post.objects.all(), pk=pk)
+        return super(PostDialog, self).dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.post = self.post
+        form.instance.author = self.request.user
+        return super(PostDialog, self).form_valid(form)
+
+    def get_success_url(self):
+        return resolve_url("post:post_detail", pk=self.post.pk)
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDialog, self).get_context_data(**kwargs)
+        context['post'] = self.post
+        return context
 
 
 class CommentsWithAjax(DetailView):

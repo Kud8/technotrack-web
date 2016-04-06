@@ -2,6 +2,9 @@
  * Created by kymid on 03.04.16.
  */
 function load_comments() {
-    $('#comments').load('{% url "post:post_comments" pk=post.id %}');
+    $('[data-comments-url]').each(function() {
+        var url = $(this).data('comments-url');
+        $(this).load(url);
+    });
 };
 window.setInterval(load_comments, 1000);

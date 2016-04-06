@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block include-css %}
+    {% load staticfiles %}
+    <link href="{% static "css/logout.css" %}" rel="stylesheet">
+{% endblock %}
+
 {% block title %}Log out{% endblock %}
 
 {% block content %}
