@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/update/$', views.PostUpdate.as_view(), name='post_update'),
     url(r'^(?P<pk>\d+)/$', PostDialog.as_view(), name="post_detail"),
     url(r'^(?P<pk>\d+)/ajax/$', CommentsWithAjax.as_view(), name="post_comments"),
+
 ]

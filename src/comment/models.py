@@ -4,6 +4,10 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
+from adjacent import Client
+from django.dispatch import receiver
+from django.template.defaultfilters import date as _date
+from datetime import datetime
 
 class Comment(models.Model):
     text = models.TextField(verbose_name=u'Текст')
@@ -20,4 +24,25 @@ class Comment(models.Model):
         verbose_name_plural = u'Комментарии'
         ordering = ('-pub_date', )
 
-# Create your models here.
+    def as_compact_dict(self):
+        return {"author": self.author.pk, "text": self.text, "pub_date": _date(self.pub_date, 'd b Y г. H:i'), "change_date": _date(self.change_date, 'd b Y г. H:i')}
+
+    # def get_cent_answers_channel_name(self):
+    #     return "%d"%self.id
+
+@receiver(models.signals.post_save, sender=Comment)
+def on_answer_creation(sender, instance, *args, **kwargs):
+    if kwargs.get('created'):
+        comment = instance
+        from .tasks import send_email_notification
+        send_email_notification.delay(
+            'mitya-kudr@mail.ru',
+            'New answer to question "{}"'.format(comment.post.title),
+            'You got answer with the text: "{}"'.format(comment.text)
+        )
+
+        client = Client()
+        client.publish(comment.post.get_cent_answers_channel_name(), comment.as_compact_dict())
+        response = client.send()
+        print('sent to channel {}, got response from centrifugo: {}'.format(comment.post.get_cent_answers_channel_name(),
+                                                                            response))

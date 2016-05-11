@@ -1,0 +1,38 @@
+.content {
+    padding: 1rem 3rem;
+}
+
+.myForm {
+    font-size: 16px;
+}
+
+.myForm tr {
+    margin-bottom: 15px;
+}
+
+.myForm li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.myForm label {
+    margin-bottom: 0;
+}
+
+.myForm ul {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.myForm td {
+    padding-left: 10px;
+}
+
+.myForm th, .myForm td {
+    margin-top: 15px;
+}
+
+.row {
+    margin-bottom: 30px;
+}

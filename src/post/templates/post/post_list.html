@@ -23,8 +23,11 @@
                 <div class="post_title center">{{ post.title }}</div>
                 <div class="text">{{ post.text }}</div>
 
-                <div class="pub_date small">Дата создания: {{ post.pub_date }}</div>
-                <div class="change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
+                <div class="item_container">
+                    <div class="pub_date small">Дата создания: {{ post.pub_date }}</div>
+                    <div class="comments_count"><i><small>Количество комментариев: {{ post.comments_count }}</small></i></div>
+                    <div class="change_date small">Дата последнего редактирования: {{ post.change_date }}</div>
+                </div>
             </a>
         {% endfor %}
     </div>

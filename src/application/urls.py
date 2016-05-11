@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^base/', login, {'template_name': 'core/main_page.html'}, name="base"),
     url(r'^blog/', include('blog.urls', namespace="blog")),
     url(r'^core/', include('core.urls', namespace='core')),
+    url(r'^comments/', include('comment.urls', namespace="comment")),
+    url(r'^search/', include('haystack.urls', app_name='search', namespace='search')),
 ]

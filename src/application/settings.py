@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     'comment',
     'blog',
     'widget_tweaks',
+    'bootstrap3',
+    'adjacent',
+    'haystack',
+    'search',
+    'djcelery',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -68,16 +73,36 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'adjacent.context_processors.main',
             ],
         },
     },
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
 LOGIN_REDIRECT_URL = "core:base"
 LOGIN_URL = "core:login"
 
+CENTRIFUGE_ADDRESS = 'http://centrifuge.mysite.ru'
+CENTRIFUGE_SECRET = 'd0b21085-6ea4-4b3c-aa1f-4f874e4f7c41'
+CENTRIFUGE_TIMEOUT = 10
+
+BROKER_URL = 'redis://localhost:6379/0'
+
+EMAIL_HOST = 'smtp.list.ru'
+EMAIL_PORT = 2525 #25
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kudryavtsev.10@list.ru'
+
+EMAIL_HOST_PASSWORD = 'password2580'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
